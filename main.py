@@ -5,9 +5,9 @@ from ultilities.analysisTools import *
 
 class Testing():
     def CorrelationTest(self):
-        btcData = DataGetting('btc-usd').getHistoricalData()
-        ethData = DataGetting('eth-usd').getHistoricalData()
-        dogeData = DataGetting('doge-usd').getHistoricalData()
+        btcData = DataGetting('btc-usd').getHistoricalData('1y')
+        ethData = DataGetting('eth-usd').getHistoricalData('1y')
+        dogeData = DataGetting('doge-usd').getHistoricalData('1y')
         btcPrice = btcData['Close'].copy().tolist()
         ethPrice = ethData['Close'].copy().tolist()
         dogePrice = dogeData['Close'].copy().tolist()
@@ -15,5 +15,13 @@ class Testing():
         MomentumAnalysis().priceCorrelation([{'Name': 'BTC', 'Data': btcPrice}, 
                                             {'Name': 'ETH', 'Data': ethPrice}, 
                                             {'Name': 'Doge', 'Data': dogePrice}])
+    
+    def RsiTest(self): 
+        btcData = DataGetting('btc-usd').getHistoricalData('1y')
+        btcData = Indicators().RelativeStrengthIndex(Data=btcData, interval=14)
+        print(btcData['Relative Strength Index'])
+        plt.plot(btcData['Relative Strength Index'])
+        plt.show()
 
-Testing().CorrelationTest()
+Testing().RsiTest()
+# Testing().CorrelationTest()

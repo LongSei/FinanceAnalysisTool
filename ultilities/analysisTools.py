@@ -36,6 +36,86 @@ class MomentumAnalysis():
         plt.show()
 
 class Indicators(): 
+    def IncreaseOrDecrease(self, Data): 
+        """
+        Adding the Status for each day. Whether it increase or decrease with the previous day
+
+        Parameters
+        ----------
+        Data : (pandas DataFrame)
+            The data consist of closing prices
+        
+        Returns
+        -------
+        Data : (pandas DataFrame)
+            The DataFrame with Status of price
+        """
+
+        if ('Status' in Data.columns) == True: 
+            return Data
+        
+        StatusPrice = ["Increase"]
+        for i in range(1, len(Data['Close'])): 
+            if (Data['Close'][i - 1] > Data['Close'][i]): 
+                StatusPrice.append("Decrease")
+            else: 
+                StatusPrice.append("Increase")
+
+        Data['Status'] = StatusPrice
+        return Data
+    
+    def RelativeStrengthIndex(self, Data, interval): 
+        """
+        Adding the Relative Strength Index into the dataframe
+
+        Parameters
+        ----------
+        Data : (pandas DataFrame)
+            The data consist of close prices and status of prices. 
+        interval: (int)
+            The interval used for the rsi 
+
+        Returns
+        -------
+        Data : (pandas DataFrame)
+            The DataFrame with the RSI added
+        """
+        
+        Data = self.IncreaseOrDecrease(Data)
+        closePrice = Data['Close']
+        statePrice = Data['Status']
+        
+        rsi = [0 for x in range(interval - 1)]
+
+        # Calculate the first RSI
+        avgGain = 0
+        avgLoss = 0
+        for day in range(0, interval): 
+            if (Data['Status'][day] == "Increase"): 
+                avgGain += Data['Close'][day] / interval
+            else: 
+                avgLoss += Data['Close'][day] / interval
+        rs = avgGain / avgLoss
+        rsi.append(100 - (100 / (1 + rs)))
+
+        # Calculate other RSI
+        for day in range(interval, len(Data['Close'])): 
+            changePrice = abs(Data['Close'][day - 1] - Data['Close'][day])
+            if (Data['Status'][day] == "Increase"): 
+                avgGain = (avgGain * (interval - 1) + changePrice) / interval
+                avgLoss = (avgLoss * (interval - 1)) / interval
+            else: 
+                avgGain = (avgGain * (interval - 1)) / interval
+                avgLoss = (avgLoss * (interval - 1) + changePrice) / interval
+            if (avgLoss == 0): 
+                rsi.append(100)
+            else: 
+                rs = avgGain / avgLoss
+                rsi.append(100 - (100 / (1 + rs)))
+                
+        Data["Relative Strength Index"] = rsi
+        return Data
+
     def MovingAverage(self, Data, interval): 
         """
         Adding the Moving Average into the dataframe
@@ -43,9 +123,9 @@ class Indicators():
         Parameters
         ----------
         Data : (pandas DataFrame)
-            The DataFrame containing the closing prices.
+            The data consist of close prices.
         interval : (int)
-            The number of periods to use for the moving average.
+            The interval used for the moving average.
         
         Returns
         -------
@@ -53,10 +133,8 @@ class Indicators():
             The DataFrame with the Moving Average added.
         """
 
-        # Calculate the moving average
         moving_average = Data['Close'].rolling(interval).mean()
 
-        # Add to the dataset
         Data['Moving Average'] = moving_average
         return Data
 
@@ -67,9 +145,9 @@ class Indicators():
         Parameters
         ----------
         Data : (pandas DataFrame)
-            The DataFrame containing the closing prices.
+            The data consist of close prices.
         interval : int
-            The number of periods to use for the moving average.
+            The interval used for the moving average.
         num_stds : float
             The number of standard deviations to use for the bands.
         
@@ -79,17 +157,13 @@ class Indicators():
             The DataFrame with the Bollinger Bands added.
         """
 
-        # Calculate the moving average
         moving_average = Data['Close'].rolling(interval).mean()
         
-        # Calculate the standard deviation
         standard_deviation = Data['Close'].rolling(interval).std()
         
-        # Calculate the upper and lower bands
         upper_band = moving_average + num_stds * standard_deviation
         lower_band = moving_average - num_stds * standard_deviation
         
-        # Add the bands to the DataFrame
         Data['Bollinger Bands Upper'] = upper_band
         Data['Bollinger Bands Lower'] = lower_band
         return Data
