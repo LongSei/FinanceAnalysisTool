@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
-class MomentumAnalysis(): 
-    def priceCorrelation(self, priceDict: list):
+class Momentum(): 
+    def Correlation(self, priceDict: list):
         """
         Plot the correlation between coins
 
@@ -35,7 +35,7 @@ class MomentumAnalysis():
         fig.tight_layout()
         plt.show()
 
-class Indicators(): 
+class Indicator(): 
     def IncreaseOrDecrease(self, Data): 
         """
         Adding the Status for each day. Whether it increase or decrease with the previous day

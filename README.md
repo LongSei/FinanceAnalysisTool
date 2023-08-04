@@ -15,8 +15,9 @@ Requests==2.31.0
 yfinance==0.2.22
 ```
 ## Features
-- Crawling crypto data
+- Crawling data
 - Technical Indicators
+- Tracking crypto wallet
 
 ## Tools 
 #### Momentum Analysis
@@ -33,8 +34,10 @@ yfinance==0.2.22
 <!-- #### On-chain Analysis -->
 <!-- #### News Analysis -->
 
+#### On-chain Analysis
+- Tracking crypto wallets (Updating...)
 ## Usage
-:star: You can read the code comment to know exacly which is the input and output of functions
+:star: You can read the code comment to know exactly which is the input and output of functions
 #### Crawling Data
 :thought_balloon: Return the pandas DataFrame which contains information about the finance products
 ``` python
