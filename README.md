@@ -30,7 +30,8 @@ yfinance==0.2.22
 - BB - Bollinger Bands
 - Updating...
 <!-- Future feature -->
-<!-- #### Machine Learning Analysis  -->
+#### Machine Learning Analysis 
+- LSTM 
 <!-- #### On-chain Analysis -->
 <!-- #### News Analysis -->
 
@@ -38,6 +39,7 @@ yfinance==0.2.22
 - Tracking crypto wallets (Updating...)
 ## Usage
 :star: You can read the code comment to know exactly which is the input and output of functions
+
 #### Crawling Data
 :thought_balloon: Return the pandas DataFrame which contains information about the finance products
 ``` python
@@ -45,7 +47,10 @@ yfinance==0.2.22
 btcData = DataGetting('btc-usd').getHistoricalData(period='1y', interval='1d')
 print(btcData)
 ```
+
 #### Momentum Analysis
+![plot](/img/Momentum/CorrelationTest.png)
+
 :thought_balloon: Consider the price movement of coins
 ``` python
 # Example with correlation between price of finance products
@@ -63,4 +68,24 @@ Momentum().Correlation([{'Name': 'BTC', 'Data': btcPrice},
 btcData = DataGetting('btc-usd').getHistoricalData('1y').copy().tolist()
 btcData = Indicator().MovingAverage(Data=btcData, interval=14)
 print(btcData)
+```
+
+#### Machine Learning Analysis
+##### Training Plot
+<img src="/img/Machine%20Learning/LSTM/TrainGraph.png" alt="TrainGraph" width="200"/>
+
+##### Testing Plot
+<img src="/img/Machine%20Learning/LSTM/TestGraph.png" alt="TestGraph" width="200"/>
+
+##### Predict Plot
+<img src="/img/Machine%20Learning/LSTM/PredictGraph.png" alt="PredictGraph" width="200"/>
+
+:thought_balloon: Applied machine learning to predict the future price of finance products
+
+``` python
+# Example with predicting bitcoin price using LSTM
+btcData = DataGetting('btc-usd').getHistoricalData('4y')
+model = MachineLearning().LSTM(btcData, 30)
+model.runLSTM()
+print(model.predict(predictData))
 ```
