@@ -15,11 +15,16 @@ Requests==2.31.0
 yfinance==0.2.22
 ```
 ## Features
-- Crawling data
+- Crawling data (yfinance)
+- BackTesting
 - Technical Indicators
 - Tracking crypto wallet
 
 ## Tools 
+#### BackTesting
+- Single order
+- Multiple order (fixed interval, with condition,...)
+
 #### Momentum Analysis
 - Correlation Graph
 - Updating...
@@ -37,8 +42,20 @@ yfinance==0.2.22
 
 #### On-chain Analysis
 - Tracking crypto wallets (Updating...)
+
 ## Usage
 :star: You can read the code comment to know exactly which is the input and output of functions
+
+#### BackTesting
+:thought_balloon: Return the result for backtesting
+``` python
+# Example with Single order
+beginTime = "12/02/2023"
+endTime = "12/03/2023"
+budget = 1000
+result = BackTesting().SingleBuyWithPeriod(beginTime, endTime, budget, 'btc-usd')
+print(result)
+```
 
 #### Crawling Data
 :thought_balloon: Return the pandas DataFrame which contains information about the finance products
@@ -72,13 +89,13 @@ print(btcData)
 
 #### Machine Learning Analysis
 ##### Training Plot
-![plot](/img/Machine%20Learning/LSTM/TrainGraph.png)
+<img src="/img/Machine%20Learning/LSTM/TrainGraph.png" width = "550" height = "300"/>
 
 ##### Testing Plot
-![plot](/img/Machine%20Learning/LSTM/TestGraph.png)
+<img src="/img/Machine%20Learning/LSTM/TestGraph.png" width = "550" height = "300"/>
 
 ##### Predict Plot
-![plot](/img/Machine%20Learning/LSTM/PredictGraph.png)
+<img src="/img/Machine%20Learning/LSTM/PredictGraph.png" width = "550" height = "300"/>
 
 :thought_balloon: Applied machine learning to predict the future price of finance products
 
