@@ -22,12 +22,4 @@ class Testing():
         plt.plot(btcData['Relative Strength Index'])
         plt.show()
 
-    def machineLearning(self): 
-        btcData = DataGetting('btc-usd').getHistoricalData('4y')
-        model = MachineLearning().LSTM(btcData, 30)
-        model.runLSTM()
-        plt.plot(model.modelPredict(model.xTest))
-        plt.plot(model.yTest)
-        plt.show()
-
 # Testing().machineLearning()

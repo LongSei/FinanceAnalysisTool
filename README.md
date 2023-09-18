@@ -35,8 +35,6 @@ yfinance==0.2.22
 - BB - Bollinger Bands
 - Updating...
 <!-- Future feature -->
-#### Machine Learning Analysis 
-- LSTM 
 <!-- #### On-chain Analysis -->
 <!-- #### News Analysis -->
 
@@ -86,25 +84,3 @@ btcData = DataGetting('btc-usd').getHistoricalData('1y').copy().tolist()
 btcData = Indicator().MovingAverage(Data=btcData, interval=14)
 print(btcData)
 ```
-
-#### Machine Learning Analysis
-##### Training Plot
-<img src="/img/Machine%20Learning/LSTM/TrainGraph.png" width = "550" height = "300"/>
-
-##### Testing Plot
-<img src="/img/Machine%20Learning/LSTM/TestGraph.png" width = "550" height = "300"/>
-
-##### Predict Plot
-<img src="/img/Machine%20Learning/LSTM/PredictGraph.png" width = "550" height = "300"/>
-
-:thought_balloon: Applied machine learning to predict the future price of finance products
-
-``` python
-# Example with predicting bitcoin price using LSTM
-btcData = DataGetting('btc-usd').getHistoricalData('4y')
-model = MachineLearning().LSTM(btcData, 30)
-model.runLSTM()
-print(model.predict(predictData))
-```
-
-- Note: This tool only supports the basic model frame. Most efficiency depends on the data. You can modify the model in the "modelBuild" function in the code.
