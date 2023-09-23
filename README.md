@@ -14,11 +14,11 @@ This project is implemented base on these library:
 
 ## Installation
 ```bash
-git clone https://github.com/LongSei/CryptoAnalysisTool
+git clone https://github.com/LongSei/FinanceAnalysisTool
 ```
 
 ```bash
-pip3 install -r requirement.txt
+pip3 install -r requirements.txt
 ```
 
 ## Features
