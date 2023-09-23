@@ -1,7 +1,9 @@
 import yfinance as yf
-class DataGetting(): 
+import crawling.vnquant.data as vndt
+import pandas as pd
+class DataCrypto(): 
     def __init__(self, financeProduct: str) -> None:
-        self.main = yf.Ticker(financeProduct)
+        self.ticker = yf.Ticker(financeProduct)
 
     def getPrice(self): 
         result = self.getHistoricalData(period = '1d', interval = '1m')
@@ -9,28 +11,78 @@ class DataGetting():
 
     def getInfo(self): 
         # Get information about the finance product (history)
-        result = self.main.info
+        result = self.ticker.info
         print(result)
 
-    def getHistoricalData(self, period = '1mo', interval = '1d'): 
-        # Get the dataframe about Finance Product
-        # ['Open', 'High', 'Low', 'Close', 'Volume', 'Dividends', 'Stock Splits', 'Capital Gains']
-        result = self.main.history(period, interval)
+    def getHistoricalData(self, beginTime, endTime, interval): 
+        ''' 
+        Get the historical price of crypto product
+
+        Parameters
+        ----------
+        beginTime (%YYYY/%mm/%dd): time begin crawling data
+        endTime (%YYYY/%mm/%dd): time stop crawling data
+        interval (string): interval between data (Ex: 1m,2m,5m,15m,30m,60m,90m,1h,1d,5d,1wk,1mo,3mo)
+
+        Returns
+        -------
+        data (DataFrame): price of crypto product
+        '''
+        data = self.ticker.history(begin=beginTime, end=endTime, interval=interval)
 
         # Insert date data into dataframe
-        date = result.index
+        date = data.index
         date = [day.strftime("%H:%M:%S(UTC) - %d/%m/%Y") for day in date[0::].tolist()]
-        idx = [x for x in range(1, len(result['Close']) + 1)]
-        result.insert(loc=0, column='Index', value=idx)
-        result.insert(loc=0, column='Date', value=date)
-
-        # Delete not used columns
-        # result = deleteColumns(result, ['Dividends', 'Stock Splits', 'Capital Gains'])
-        return result
+        idx = [x for x in range(1, len(data['Close']) + 1)]
+        data.insert(loc=0, column='Index', value=idx)
+        data.insert(loc=0, column='Date', value=date)
+        return data
     
     def getHolders(self): 
         # Get the information of the amount finance product the holders kept
-        InstitutionalHolders = self.main.institutional_holders
-        MajorHolders = self.main.major_holders
-        MutualFundHolders = self.main.mutualfund_holders
+        InstitutionalHolders = self.ticker.institutional_holders
+        MajorHolders = self.ticker.major_holders
+        MutualFundHolders = self.ticker.mutualfund_holders
         return (InstitutionalHolders, MajorHolders, MutualFundHolders)
+    
+class DataStock(): 
+    def __init__(self, financeProduct: str) -> None:
+        self.StockTicker = vndt.DataLoader(symbols=financeProduct, start='2018-01-01', end='2018-01-01')
+        self.CompanyTicker = vndt.FinanceLoader(symbol=financeProduct, start='2018-01-01', end='2018-01-01')
+    
+    def getHistoricalData(self, beginTime=None, endTime=None):
+        ''' 
+        Get the historical price of stock
+
+        Parameters
+        ----------
+        beginTime (%YYYY/%mm/%dd): time begin crawling data
+        endTime (%YYYY/%mm/%dd): time stop crawling data
+
+        Returns
+        -------
+        data (DataFrame): price of stock product
+        '''
+        self.StockTicker.start = beginTime = self.StockTicker.start if beginTime == None else beginTime
+        self.StockTicker.end = endTime = self.StockTicker.end if endTime == None else endTime
+        data = self.StockTicker.download()
+        return data
+    
+    def getBasicIndex(self, beginTime=None, endTime=None):
+        '''
+        Get the index (ROA, ROE, Net Profit Marget, Net Revenue Growth, Profit After tax Growth) of company 
+
+        Parameters
+        ----------
+        beginTime (%YYYY/%mm/%dd): time begin crawling data
+        endTime (%YYYY/%mm/%dd): time stop crawling data
+
+        Returns
+        -------
+        data (DataFrame): index of company
+        '''
+        self.CompanyTicker.start = beginTime = self.CompanyTicker.start if beginTime == None else beginTime
+        self.CompanyTicker.end = endTime = self.CompanyTicker.end if endTime == None else endTime
+        data = self.CompanyTicker.get_basic_index()
+        return data
+
