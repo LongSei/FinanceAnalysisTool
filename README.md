@@ -1,4 +1,4 @@
-# Cryptocurrency Analysis Tools
+# Finance Analysis Tools
 
 ![Commits](https://badgen.net/github/commits/LongSei/CryptoAnalysisTool)
 ![Issues](https://badgen.net/github/issues/LongSei/CryptoAnalysisTool)
