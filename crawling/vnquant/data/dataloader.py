@@ -1,4 +1,3 @@
-# Copyright (c) general_backbone. All rights reserved.
 from bs4 import BeautifulSoup
 from crawling.vnquant import utils
 import pandas as pd

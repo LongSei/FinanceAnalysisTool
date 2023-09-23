@@ -1,5 +1,4 @@
-﻿# Copyright (c) general_backbone. All rights reserved.
-from bs4 import BeautifulSoup
+﻿from bs4 import BeautifulSoup
 import requests
 import crawling.vnquant.utils.utils as utils
 import pandas as pd
