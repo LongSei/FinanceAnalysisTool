@@ -16,7 +16,7 @@ URL_CAFE = configs.URL_CAFE
 HEADERS = configs.HEADERS
 
 class DataLoader():
-    def __init__(self, symbols, start, end, data_source = 'vnd', minimal = True, *arg, **karg):
+    def __init__(self, symbols, start, end, data_source = 'CAFE', minimal = True, *arg, **karg):
         self.symbols = symbols
         self.start = start
         self.end = end
@@ -106,11 +106,6 @@ class DataLoaderVND(DataLoadProto):
         iterables = [stock_data.columns.tolist(), [symbol]]
         mulindex = pd.MultiIndex.from_product(iterables, names=['Attributes', 'Symbols'])
         stock_data.columns = mulindex
-
-        logging.info('data {} from {} to {} have already cloned!' \
-                     .format(symbol,
-                             utils.convert_text_dateformat(self.start, origin_type = '%d/%m/%Y', new_type = '%Y-%m-%d'),
-                             utils.convert_text_dateformat(self.end, origin_type='%d/%m/%Y', new_type='%Y-%m-%d')))
 
         return stock_data
 

@@ -1,4 +1,5 @@
-﻿from bs4 import BeautifulSoup
+﻿# Copyright (c) general_backbone. All rights reserved.
+from bs4 import BeautifulSoup
 import requests
 import crawling.vnquant.utils.utils as utils
 import pandas as pd
@@ -20,7 +21,6 @@ class FinanceLoader():
     def get_finan_report(self):
         start_time = time.time()
         page = requests.get("https://finfo-api.vndirect.com.vn/v3/stocks/financialStatement?secCodes={}&reportTypes=QUARTER&modelTypes=1,89,101,411&fromDate={}&toDate={}".format(self.symbol, self.start, self.end))
-        print(page)
         data = page.json()
         end_time = time.time()
         data_dates = {}
@@ -150,6 +150,5 @@ class FinanceLoader():
                 df = df_date
             else:
                 df = pd.merge(df, df_date, how='inner')
-
         df.set_index('index', inplace=True)
         return df
