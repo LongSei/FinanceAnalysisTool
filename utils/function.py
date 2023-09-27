@@ -1,5 +1,6 @@
 from datetime import date, timedelta
 import datetime
+import random
 
 def forDate(beginTime, endTime, timeFormat='%Y-%m-%d'):
     def daterange(beginTime, endTime):
@@ -30,3 +31,25 @@ def reMaskValue(values: list) -> list:
             cnt += 1
             values[i] = newValues[values[i]]
     return {'newList': values, 'amountMask': cnt}
+
+def randomDateRange(beginTime, endTime, lenResult):
+    '''
+    Usage
+    -----
+    Random day between 2 times with len
+
+    Parameters
+    ----------
+    beginTime ('%Y-%m-%d): start time
+    endTime ('%Y-%m-%d): end time
+    lenResult (int): len of result list
+
+    Returns 
+    -------
+    return list result
+    '''
+    listDate = forDate(beginTime, endTime)
+    beginIdx = random.randint(0, len(listDate) - lenResult)
+    endIdx = beginIdx + lenResult
+    result = listDate[beginIdx:(endIdx + 1)]
+    return [result[0], result[-1]]

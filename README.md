@@ -4,12 +4,13 @@
 ![Issues](https://badgen.net/github/issues/LongSei/CryptoAnalysisTool)
 
 ## Description
-The tool created for basic financial analysis. 
+The tool created for basic financial analysis. And also help you trainning to apply your knowledge to realistic price pattern. 
 
 This project is implemented base on these library: 
 - yfinance (https://github.com/ranaroussi/yfinance)
 - vnquant (https://github.com/phamdinhkhanh/vnquant)
 - talib (https://github.com/TA-Lib/ta-lib-python)
+- plotly (https://github.com/plotly/plotly.py)
 - ...
 
 ## Installation
@@ -22,9 +23,10 @@ pip3 install -r requirements.txt
 ```
 
 ## Features
-- Crawling data
+- Crawling Data
 - Technical Analysis
-- Plot the graph
+- Plot The Graph
+- Generate Pridicting Challenge 
 
 <!-- #### On-chain Analysis
 - Tracking crypto wallets (Updating...) -->
@@ -64,7 +66,8 @@ from crawling.price import *
 ![plot](./img/addAttribute.png)
 :thought_balloon: You need to add the data of your indicator before you can draw it
 ``` python
-data = AddAttribute().SMA(priceData=data, timePeriod=20, priceName='Close', columnName='SMA20')
+data = AddAttribute().TechnicalAnalysis().SMA(data, 20, 'Close', 'SMA20')
+data = AddAttribute().VolatilityAnalysis().ATR(data, 14, ['High', 'Low', 'Close'], columnName='ATR14')
 print(data)
 ```
 
@@ -94,4 +97,20 @@ candle_stick         Candle Stick
 SMA                  Simple Moving Average
 RSI                  Relative Strength Index
 BBANDS               Bollinger Bands      
+```
+
+#### Generate Pridicting Challenge 
+```python
+from tools.generateProblems import *
+# tickers you want to generate problem
+tickers = ['FPT', 'VNI']
+
+# Initialize the size of problemDataSet and resultDataSet
+problemLen = 100
+resultLen = 20
+
+gen = generateProblems(tickers=tickers)
+gen.generate(problemLen=problemLen, resultLen=resultLen, typeFinanceProduct='stock')
+
+# You can see the problem data in 'ProblemSet' folder
 ```
