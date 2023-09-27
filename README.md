@@ -22,9 +22,10 @@ pip3 install -r requirements.txt
 ```
 
 ## Features
-- Crawling data
+- Crawling Data
 - Technical Analysis
-- Plot the graph
+- Plot The Graph
+- Generate Pridicting Challenge 
 
 <!-- #### On-chain Analysis
 - Tracking crypto wallets (Updating...) -->
@@ -94,4 +95,20 @@ candle_stick         Candle Stick
 SMA                  Simple Moving Average
 RSI                  Relative Strength Index
 BBANDS               Bollinger Bands      
+```
+
+#### Generate Pridicting Challenge 
+```python
+from tools.generateProblems import *
+# tickers you want to generate problem
+tickers = ['FPT', 'VNI']
+
+# Initialize the size of problemDataSet and resultDataSet
+problemLen = 100
+resultLen = 20
+
+gen = generateProblems(tickers=tickers)
+gen.generate(problemLen=problemLen, resultLen=resultLen)
+
+# You can see the problem data in 'ProblemSet' folder
 ```
