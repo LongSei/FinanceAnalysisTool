@@ -10,6 +10,7 @@ This project is implemented base on these library:
 - yfinance (https://github.com/ranaroussi/yfinance)
 - vnquant (https://github.com/phamdinhkhanh/vnquant)
 - talib (https://github.com/TA-Lib/ta-lib-python)
+- plotly (https://github.com/plotly/plotly.py)
 - ...
 
 ## Installation
@@ -108,7 +109,7 @@ problemLen = 100
 resultLen = 20
 
 gen = generateProblems(tickers=tickers)
-gen.generate(problemLen=problemLen, resultLen=resultLen)
+gen.generate(problemLen=problemLen, resultLen=resultLen, typeFinanceProduct='stock')
 
 # You can see the problem data in 'ProblemSet' folder
 ```
