@@ -4,7 +4,7 @@
 ![Issues](https://badgen.net/github/issues/LongSei/CryptoAnalysisTool)
 
 ## Description
-The tool created for basic financial analysis. 
+The tool created for basic financial analysis. And also help you trainning to apply your knowledge to realistic price pattern. 
 
 This project is implemented base on these library: 
 - yfinance (https://github.com/ranaroussi/yfinance)

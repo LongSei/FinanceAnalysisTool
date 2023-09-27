@@ -10,11 +10,44 @@ class generateProblems():
         self.dataResult = pd.DataFrame
     
     def generateStock(self, problemLen, resultLen): 
+        '''
+        Usage
+        -----
+        Generate Stock Problem
+
+        Parameters
+        ----------
+        problemLen (int): Size of problem_data generated
+        resultLen (int): Size of result_data generated
+        '''
         self.generate(problemLen, resultLen, 'stock')
+
     def generateCrypto(self, problemLen, resultLen): 
+        '''
+        Usage
+        -----
+        Generate Crypto Problem
+
+        Parameters
+        ----------
+        problemLen (int): Size of problem_data generated
+        resultLen (int): Size of result_data generated
+        '''
         self.generate(problemLen, resultLen, 'crypto')
 
     def generate(self, problemLen, resultLen, typeFinanceProduct): 
+        '''
+        Usage
+        -----
+        Use to create interact with user
+
+        Parameters
+        ----------
+        problemLen (int): Size of problem_data generated
+        resultLen (int): Size of result_data generated
+        typeFinanceProduct (str): type of data generated ('crypto' || 'stock')
+        '''
+
         lenResult = problemLen + resultLen
         if (lenResult < 20):
             exit("'lenResult' must be more than or equal 20") 
@@ -34,6 +67,18 @@ class generateProblems():
         self.dataResult.to_csv('ProblemSet/ResultData.csv')
 
     def createData(self, problemLen, resultLen, typeFinanceProduct): 
+        '''
+        Usage
+        -----
+        Use to create data
+
+        Parameters
+        ----------
+        problemLen (int): Size of problem_data generated
+        resultLen (int): Size of result_data generated
+        typeFinanceProduct (str): type of data generated ('crypto' || 'stock')
+        '''
+
         beginTime = '2017-01-01'
         endTime = str(datetime.datetime.now().strftime("%Y-%m-%d"))
         lenResult = problemLen + resultLen
@@ -51,9 +96,3 @@ class generateProblems():
         data = data.reset_index(drop=True)
         self.dataProblem = data.loc[0:(problemLen - 1)]
         self.dataResult = data.loc[(problemLen):(lenResult)]
-    
-    def show(self): 
-        plot = PlotData('Problem')
-        plot.add_attribute(plot.candle_stick, 1, 'Candle Chart')
-        plot.plotGraph(self.data)
-
