@@ -66,7 +66,8 @@ from crawling.price import *
 ![plot](./img/addAttribute.png)
 :thought_balloon: You need to add the data of your indicator before you can draw it
 ``` python
-data = AddAttribute().SMA(priceData=data, timePeriod=20, priceName='Close', columnName='SMA20')
+data = AddAttribute().TechnicalAnalysis().SMA(data, 20, 'Close', 'SMA20')
+data = AddAttribute().VolatilityAnalysis().ATR(data, 14, ['High', 'Low', 'Close'], columnName='ATR14')
 print(data)
 ```
 

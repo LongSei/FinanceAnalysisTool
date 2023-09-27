@@ -63,3 +63,25 @@ class AddAttribute():
 
             priceData[columnName] = [[upper[idx], middle[idx], lower[idx]] for idx in range(len(upper))]
             return priceData
+        
+    class VolatilityAnalysis(): 
+        def ATR(self, priceData, timePeriod=14, priceName=['High', 'Low', 'Close'], columnName="ATR14"): 
+            '''
+            Usage
+            -----
+            Add Average True Range column to DataFrame
+
+            Parameters
+            ----------
+            priceData (DataFrame): the dataframe you base on
+            timePeriod (int): interval for each data record
+            priceName (str): the name of the column you want to base on
+            columnName (str): the name of the columns you want to add
+
+            Returns
+            -------
+            priceData (DataFrame): Dataframe have Average True Range
+            '''
+
+            priceData[columnName] = talib.ATR(priceData[priceName[0]], priceData[priceName[1]], priceData[priceName[2]], timeperiod=timePeriod)
+            return priceData
