@@ -99,6 +99,11 @@ RSI                  Relative Strength Index
 BBANDS               Bollinger Bands      
 ```
 
+##### Volatility List
+```
+ATR                  Average True Range
+```
+
 #### Generate Pridicting Challenge 
 ```python
 from tools.generateProblems import *
