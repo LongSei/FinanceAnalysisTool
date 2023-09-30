@@ -105,7 +105,7 @@ class generateProblems():
             isGenerated = True
             sys.stdout.write("\x1b[1;32mData have been generated !\x1b[1;0m" + '\n')
             sys.stdout.write("\x1b[1;35mYou can see the problem data in '" + problemPath + "' folder\x1b[1;0m" + '\n')
-            sys.stdout.write("\x1b[1;35mYou can submit answer for the problem by running this: \x1b[1;0m 'python main.py --submit [problemId]'" + '\n')
+            sys.stdout.write("\x1b[1;35mYou can submit answer for the problem by running this: \x1b[1;0m 'python main.py --solve [problemId]'" + '\n')
         except: 
             isGenerated = True
             sys.stdout.write('\n')
