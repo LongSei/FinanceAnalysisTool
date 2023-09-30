@@ -99,7 +99,25 @@ RSI                  Relative Strength Index
 BBANDS               Bollinger Bands      
 ```
 
+##### Volatility List
+```
+ATR                  Average True Range
+```
+
 #### Generate Pridicting Challenge 
+
+
+##### Use Command-Line 
+
+https://github.com/LongSei/FinanceAnalysisTool/assets/74856548/715f0f5f-5d7e-481a-a619-b6050f94f535
+
+
+``` bash
+# See help command
+python3 main.py -h
+```
+
+##### Use your own python code
 ```python
 from tools.generateProblems import *
 # tickers you want to generate problem
