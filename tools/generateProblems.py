@@ -41,7 +41,7 @@ class generateProblems():
             returnCommand = "\x1b[1;31mSorry ! But you lost: " + str(profit) + "%\x1b[0m"
         sys.stdout.write(returnCommand)
 
-        order = str(input("\x1b[1mDo you want to delete this problem ? (YES | NO): \x1b[0m")).lower()
+        order = str(input("\x1b[1m\nDo you want to delete this problem ? (YES | NO): \x1b[0m")).lower()
         if (order[0] == 'y'): 
             try:
                 self.__deleteData(id)
